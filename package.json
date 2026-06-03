@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.4.3"
+    "@iconify-json/logos": "^1.2.11",
+    "astro": "^6.4.3",
+    "astro-icon": "^1.1.5"
   }
 }

@@ -7,6 +7,7 @@ interface Project {
   tags: string[];
   github: string;
   demo?: string;
+  wide?: boolean;
 }
 
 const projects: Project[] = [
@@ -17,27 +18,45 @@ const projects: Project[] = [
     github: '#',
     demo: '#',
   },
+  {
+    title: 'Proyecto 2',
+    description: 'Descripción del segundo proyecto.',
+    tags: ['React', 'TypeScript'],
+    github: '#',
+  },
+  {
+    title: 'Proyecto destacado',
+    description: 'Este proyecto ocupa toda la fila inferior. Ideal para tu trabajo más importante o el que más quieras destacar al recruiter.',
+    tags: ['Spring Boot', 'Kotlin', 'React', 'PostgreSQL'],
+    github: '#',
+    demo: '#',
+    wide: true,
+  },
 ];
 ---
 
 <section id="projects" class="projects">
   <div class="container">
     <h2 class="section-title">Proyectos</h2>
-    <div class="projects-grid">
+    <div class="bento-grid">
       {projects.map(project => (
-        <article class="project-card">
-          <div>
+        <article class={`project-card${project.wide ? ' project-card--wide' : ''}`}>
+          <div class="project-card-body">
             <h3 class="project-card-title">{project.title}</h3>
             <p class="project-card-desc">{project.description}</p>
           </div>
-          <div>
+          <div class="project-card-footer">
             <ul class="project-tags">
               {project.tags.map(tag => <li class="project-tag">{tag}</li>)}
             </ul>
             <div class="project-links">
-              <a class="project-link" href={project.github} target="_blank" rel="noopener">GitHub</a>
+              <a class="project-link" href={project.github} target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+              </a>
               {project.demo && (
-                <a class="project-link" href={project.demo} target="_blank" rel="noopener">Demo →</a>
+                <a class="project-link" href={project.demo} target="_blank" rel="noopener noreferrer">
+                  Demo →
+                </a>
               )}
             </div>
           </div>

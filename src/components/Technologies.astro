@@ -1,16 +1,46 @@
 ---
-import '../styles/technologies.css';
+import "../styles/technologies.css";
+import { Icon } from "astro-icon/components";
 
-const skills = [
-  'HTML & CSS',
-  'TypeScript',
-  'Astro',
-  'React',
-  'Java',
-  'Spring Boot',
-  'Kotlin',
-  'Jetpack Compose',
-  'Git',
+const categories = [
+  {
+    title: "Frontend",
+    techs: [
+      { name: "HTML", icon: "html" },
+      { name: "CSS", icon: "css" },
+      { name: "TypeScript", icon: "logos:typescript-icon" },
+      { name: "React", icon: "logos:react" },
+      { name: "Astro", icon: "logos:astro-icon" },
+      {
+        name: "Jetpack Compose",
+        icon: "/icons/jetpack-compose.png",
+        isPng: true,
+      },
+    ],
+  },
+  {
+    title: "Backend",
+    techs: [
+      { name: "Java", icon: "logos:java" },
+      { name: "Spring Boot", icon: "logos:spring-icon" },
+      { name: "Kotlin", icon: "logos:kotlin-icon" },
+      { name: "PostgreSQL", icon: "logos:postgresql" },
+    ],
+  },
+  {
+    title: "Herramientas",
+    techs: [
+      { name: "Git", icon: "logos:git-icon" },
+      { name: "GitHub", icon: "logos:github-icon" },
+      { name: "Linux", icon: "logos:linux-tux" },
+      { name: "Docker", icon: "logos:docker-icon" },
+      { name: "AWS Foundations", icon: "logos:aws" },
+    ],
+  },
+  {
+    title: "Aprendiendo",
+    techs: [],
+  },
 ];
 ---
 
@@ -18,9 +48,48 @@ const skills = [
   <div class="container">
     <h2 class="section-title">Tecnologías</h2>
     <div class="tech-grid">
-      {skills.map(skill => (
-        <div class="tech-item">{skill}</div>
-      ))}
+      {
+        categories.map((cat) => (
+          <div class="tech-card">
+            <div class="tech-card-inner">
+              <div class="tech-card-header">
+                <h3 class="tech-card-title">{cat.title}</h3>
+              </div>
+              <ul class="tech-list">
+                {cat.techs.map((tech) => (
+                  <li class="tech-item">
+                    {tech.isPng ? (
+                      <img
+                        src={tech.icon}
+                        class="tech-icon"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <Icon
+                        name={tech.icon}
+                        class="tech-icon"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span>{tech.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".tech-card").forEach((card) => {
+    card.addEventListener("mousemove", (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    });
+  });
+</script>
