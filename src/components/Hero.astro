@@ -1,14 +1,68 @@
 ---
-import '../styles/hero.css';
+import "../styles/hero.css";
+import yoImg from "../assets/yo.jpg";
+
+const contactLinks = [
+  {
+    label: "Email",
+    href: "mailto:jjgphillips1@gmail.com",
+    icon: "fa-solid fa-envelope",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/JuanJGP10",
+    icon: "fa-brands fa-github",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/juan-garc%C3%ADa-phillips-58a418370/",
+    icon: "fa-brands fa-linkedin-in",
+  },
+];
 ---
 
 <section id="hero" class="hero">
-  <div class="container">
-    <h1 class="hero-title">Juan García</h1>
+  <div class="container hero-container hero-left">
+    <h1 class="hero-title">Juan García Phillips</h1>
     <p class="hero-subtitle">Fullstack Developer</p>
-    <p class="hero-bio">
-      Bio
-    </p>
-    <a href="#projects" class="hero-cta">Ver mis proyectos</a>
+
+    <div class="hero-bio-row">
+      <p class="hero-bio">
+        Transformo operaciones complejas en ecosistemas inteligentes con
+        Ingeniería de Software y Automatización. Experto en integrar Datos, IA y
+        Plataformas Empresariales. No solo escribo código, construyo soluciones.
+      </p>
+      <div
+        class="hero-photo"
+        style={`background-image: url(${yoImg.src})`}
+        role="img"
+        aria-label="Juan García Phillips"
+      >
+      </div>
+    </div>
+
+    <div class="hero-contact">
+      {
+        contactLinks.map((link) => (
+          <a
+            class="hero-contact-link"
+            href={link.href}
+            target={link.href.startsWith("http") ? "_blank" : undefined}
+            rel={
+              link.href.startsWith("http") ? "noopener noreferrer" : undefined
+            }
+            aria-label={link.label}
+          >
+            <i class={link.icon} aria-hidden="true" />
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <a href="#experience" class="hero-scroll" aria-label="Ver experiencia">
+      <span>Experiencia</span>
+      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    </a>
   </div>
 </section>

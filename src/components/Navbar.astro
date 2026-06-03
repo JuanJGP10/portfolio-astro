@@ -1,15 +1,49 @@
 ---
-import '../styles/navbar.css';
+import "../styles/navbar.css";
+
+const socialLinks = [
+  {
+    label: "Email",
+    href: "mailto:jjgphillips1@gmail.com",
+    icon: "fa-solid fa-envelope",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/JuanJGP10",
+    icon: "fa-brands fa-github",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/juan-garc%C3%ADa-phillips-58a418370/",
+    icon: "fa-brands fa-linkedin-in",
+  },
+];
 ---
 
 <nav class="nav">
   <div class="nav-container">
     <a class="nav-logo" href="#hero">JuanDev</a>
     <ul class="nav-links">
-      <li><a class="nav-link" href="#hero">Inicio</a></li>
-      <li><a class="nav-link" href="#about">Sobre mí</a></li>
+      <li><a class="nav-link" href="#experience">Experiencia</a></li>
       <li><a class="nav-link" href="#projects">Proyectos</a></li>
-      <li><a class="nav-link" href="#contact">Contacto</a></li>
+      <li><a class="nav-link" href="#technologies">Tecnologías</a></li>
     </ul>
+    <div class="nav-socials">
+      {
+        socialLinks.map((link) => (
+          <a
+            class="nav-social-link"
+            href={link.href}
+            target={link.href.startsWith("http") ? "_blank" : undefined}
+            rel={
+              link.href.startsWith("http") ? "noopener noreferrer" : undefined
+            }
+            aria-label={link.label}
+          >
+            <i class={link.icon} aria-hidden="true" />
+          </a>
+        ))
+      }
+    </div>
   </div>
 </nav>

@@ -1,0 +1,26 @@
+---
+import '../styles/technologies.css';
+
+const skills = [
+  'HTML & CSS',
+  'TypeScript',
+  'Astro',
+  'React',
+  'Java',
+  'Spring Boot',
+  'Kotlin',
+  'Jetpack Compose',
+  'Git',
+];
+---
+
+<section id="technologies" class="technologies">
+  <div class="container">
+    <h2 class="section-title">Tecnologías</h2>
+    <div class="tech-grid">
+      {skills.map(skill => (
+        <div class="tech-item">{skill}</div>
+      ))}
+    </div>
+  </div>
+</section>

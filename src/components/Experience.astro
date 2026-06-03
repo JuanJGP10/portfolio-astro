@@ -1,0 +1,42 @@
+---
+import '../styles/experience.css';
+
+interface Job {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  tags: string[];
+}
+
+const jobs: Job[] = [
+  {
+    role: 'Puesto',
+    company: 'Empresa',
+    period: 'Ene 2024 — Presente',
+    description: 'Descripción de responsabilidades y logros.',
+    tags: ['React', 'TypeScript', 'Spring Boot'],
+  },
+];
+---
+
+<section id="experience" class="experience">
+  <div class="container">
+    <h2 class="section-title">Experiencia</h2>
+    <div class="experience-list">
+      {jobs.map(job => (
+        <article class="experience-item">
+          <div class="experience-header">
+            <span class="experience-role">{job.role}</span>
+            <span class="experience-period">{job.period}</span>
+          </div>
+          <p class="experience-company">{job.company}</p>
+          <p class="experience-desc">{job.description}</p>
+          <ul class="experience-tags">
+            {job.tags.map(tag => <li class="experience-tag">{tag}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

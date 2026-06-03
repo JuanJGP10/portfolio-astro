@@ -1,69 +1,132 @@
-:root {
-  --clr-bg: #0f0f13;
-  --clr-bg-alt: #0d0d11;
-  --clr-heading: #f1f5f9;
-  --clr-body: #e2e8f0;
-  --clr-muted: #94a3b8;
-  --clr-dim: #64748b;
-  --clr-dimmer: #475569;
-  --clr-accent: #4f46e5;
-  --clr-accent-hover: #4338ca;
-  --clr-accent-light: #818cf8;
-  --clr-accent-lighter: #a5b4fc;
-  --clr-border: rgba(255, 255, 255, 0.08);
-  --clr-border-subtle: rgba(255, 255, 255, 0.06);
-  --clr-accent-bg: rgba(79, 70, 229, 0.1);
-  --clr-accent-border: rgba(79, 70, 229, 0.3);
-  --nav-height: 70px;
-  --max-width: 1100px;
+@layer base, layout, components, utilities;
+
+@layer base {
+  :root {
+    /* --- Paleta --- */
+    --c-bg:        #0D0D0D;
+    --c-surface:   #141414;
+    --c-surface-2: #1C1C1C;
+    --c-border:    #262626;
+    --c-border-sub:#1A1A1A;
+    --c-text:      #F2F2F2;
+    --c-muted:     #8C8C8C;
+    --c-dim:       #404040;
+
+    /* --- Tipografía --- */
+    --font-display: 'Clash Display', system-ui, sans-serif;
+    --font-body:    'Satoshi', system-ui, sans-serif;
+
+    /* --- Escala tipográfica fluida --- */
+    --step--1: clamp(0.8rem,  0.77rem + 0.14vw, 0.9rem);
+    --step-0:  clamp(1rem,    0.96rem + 0.18vw, 1.1rem);
+    --step-1:  clamp(1.2rem,  1.13rem + 0.34vw, 1.45rem);
+    --step-2:  clamp(1.44rem, 1.33rem + 0.54vw, 1.8rem);
+    --step-3:  clamp(1.73rem, 1.57rem + 0.8vw,  2.25rem);
+    --step-4:  clamp(2.07rem, 1.84rem + 1.17vw, 2.8rem);
+    --step-5:  clamp(2.49rem, 2.15rem + 1.7vw,  3.5rem);
+
+    /* --- Espaciado --- */
+    --space-xs:  0.5rem;
+    --space-s:   1rem;
+    --space-m:   1.5rem;
+    --space-l:   2rem;
+    --space-xl:  3rem;
+    --space-2xl: 5rem;
+    --space-3xl: 7rem;
+
+    /* --- Layout --- */
+    --max-width:  800px;
+    --nav-height: 68px;
+    --radius-s:   6px;
+    --radius-m:   10px;
+    --radius-l:   14px;
+
+    /* --- Transición base --- */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration: 200ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.7;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--c-text);
+  }
+
+  :where(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :where(ul, ol) {
+    list-style: none;
+  }
+
+  :where(img, svg) {
+    display: block;
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-text);
+    outline-offset: 3px;
+    border-radius: var(--radius-s);
+  }
+
+  section {
+    scroll-margin-top: var(--nav-height);
+  }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer layout {
+  .container {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    width: 100%;
+  }
 
-html {
-  scroll-behavior: smooth;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: var(--clr-bg);
-  color: var(--clr-body);
-}
+  .section-title {
+    font-size: var(--step-3);
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--c-text);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    padding-bottom: var(--space-s);
+  }
 
-body {
-  line-height: 1.6;
-}
-
-section {
-  scroll-margin-top: var(--nav-height);
-}
-
-/* --- Utilidades compartidas --- */
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  width: 100%;
-}
-
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  color: var(--clr-heading);
-  margin-bottom: 3rem;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background: var(--clr-accent);
-  border-radius: 2px;
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--c-text);
+    border-radius: 2px;
+  }
 }
