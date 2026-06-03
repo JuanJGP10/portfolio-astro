@@ -96,7 +96,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-s);
-  margin-top: var(--space-xs);
+  margin-top: var(--space-xl);
   align-items: center;
 }
 
