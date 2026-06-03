@@ -1,0 +1,39 @@
+---
+import '../styles/about.css';
+
+const skills = [
+  'HTML & CSS',
+  'TypeScript',
+  'Astro',
+  'React',
+  'Java',
+  'Springboot',
+  'Kotlin',
+  'Jetpack Compose',
+  'Git',
+];
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Sobre mí
+        </p>
+        <p>
+          Sobre mi
+        </p>
+      </div>
+      <div>
+        <h3 class="about-skills-title">Tecnologías</h3>
+        <ul class="about-skills-list">
+          {skills.map(skill => (
+            <li class="about-skill">{skill}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

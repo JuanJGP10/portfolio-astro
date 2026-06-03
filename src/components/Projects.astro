@@ -1,0 +1,48 @@
+---
+import '../styles/projects.css';
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  github: string;
+  demo?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: 'Portfolio Personal',
+    description: 'Este mismo portfolio, construido con Astro. Diseño minimalista, cero JavaScript enviado al navegador.',
+    tags: ['Astro', 'HTML', 'CSS'],
+    github: '#',
+    demo: '#',
+  },
+];
+---
+
+<section id="projects" class="projects">
+  <div class="container">
+    <h2 class="section-title">Proyectos</h2>
+    <div class="projects-grid">
+      {projects.map(project => (
+        <article class="project-card">
+          <div>
+            <h3 class="project-card-title">{project.title}</h3>
+            <p class="project-card-desc">{project.description}</p>
+          </div>
+          <div>
+            <ul class="project-tags">
+              {project.tags.map(tag => <li class="project-tag">{tag}</li>)}
+            </ul>
+            <div class="project-links">
+              <a class="project-link" href={project.github} target="_blank" rel="noopener">GitHub</a>
+              {project.demo && (
+                <a class="project-link" href={project.demo} target="_blank" rel="noopener">Demo →</a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

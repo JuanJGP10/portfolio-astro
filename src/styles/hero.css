@@ -1,0 +1,50 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.hero-greeting {
+  color: var(--clr-accent-light);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: var(--clr-heading);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--clr-dim);
+  margin-bottom: 1.5rem;
+}
+
+.hero-bio {
+  max-width: 500px;
+  color: var(--clr-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: var(--clr-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.hero-cta:hover {
+  background: var(--clr-accent-hover);
+  transform: translateY(-1px);
+}
