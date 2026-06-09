@@ -1,20 +1,46 @@
 ---
 import "../styles/experience.css";
 
+interface Highlight {
+  title: string;
+  text: string;
+}
+
 interface Job {
   role: string;
   company: string;
   period: string;
-  description: string;
+  description?: string;
+  highlights?: Highlight[];
   tags: string[];
+  logo?: string;
 }
 
 const jobs: Job[] = [
   {
-    role: "Desarrollador de Software Junior",
-    company: "Phocus Block SL - Contrato de prácticas",
+    role: "Desarrollador de Software Full-Stack",
+    company: "Phocus Block SL",
     period: "Febrero 2026 — Junio 2026",
-    description: "Descripción de responsabilidades y logros.",
+    description:
+      "Desarrollador full-stack en prácticas construyendo software en producción para una empresa de fabricación de plásticos.",
+    highlights: [
+      {
+        title: "MES y analítica industrial",
+        text: "Reconstrucción de motor de cálculo OEE en tiempo real procesando millones de lecturas de sensores industriales, visualizadas en dashboards Grafana activos en planta. Entrega de un informe de producción diario automatizado con KPIs consumido por dirección.",
+      },
+      {
+        title: "Migración de cliente ERP legacy",
+        text: "Reemplazo de un cliente ERP de 32 bits por una SPA en React + TypeScript usada a diario por los operarios para gestionar producción en planta.",
+      },
+      {
+        title: "Backend multi-base de datos",
+        text: "Diseño de una capa de servicios conectando a un ERP legacy con bases de datos PostgreSQL, incluyendo integración con hardware industrial en planta.",
+      },
+      {
+        title: "Arquitectura",
+        text: "Proyecto estructurado con Arquitectura Hexagonal utilizando Spring Boot + Java.",
+      },
+    ],
     tags: [
       "React",
       "TypeScript",
@@ -24,6 +50,7 @@ const jobs: Job[] = [
       "Maven",
       "Git",
     ],
+    logo: "/logos/phocus-block.svg",
   },
 ];
 ---
@@ -31,24 +58,50 @@ const jobs: Job[] = [
 <section id="experience" class="experience">
   <div class="container">
     <h2 class="section-title">Experiencia</h2>
-    <div class="experience-list">
-      {
-        jobs.map((job) => (
-          <article class="experience-item">
-            <div class="experience-header">
-              <span class="experience-role">{job.role}</span>
-              <span class="experience-period">{job.period}</span>
-            </div>
-            <p class="experience-company">{job.company}</p>
-            <p class="experience-desc">{job.description}</p>
-            <ul class="experience-tags">
-              {job.tags.map((tag) => (
-                <li class="experience-tag">{tag}</li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
+    <div class="experience-card">
+      <ul class="experience-list">
+        {
+          jobs.map((job) => (
+            <li class="experience-item">
+              <div class="experience-marker">
+                <div class="experience-logo">
+                  {job.logo ? (
+                    <img src={job.logo} alt={job.company} width="40" height="40" />
+                  ) : (
+                    <span class="experience-logo-initial" aria-hidden="true">
+                      {job.company[0]}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div class="experience-content">
+                <span class="experience-period">{job.period}</span>
+                <span class="experience-company">{job.company}</span>
+                <span class="experience-role">{job.role}</span>
+                {job.description && (
+                  <p class="experience-desc">{job.description}</p>
+                )}
+                {job.highlights && job.highlights.length > 0 && (
+                  <ul class="experience-highlights">
+                    {job.highlights.map((h) => (
+                      <li class="experience-highlight">
+                        <strong>{h.title}</strong>
+                        {" — "}
+                        {h.text}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <ul class="experience-tags">
+                  {job.tags.map((tag) => (
+                    <li class="experience-tag">{tag}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>

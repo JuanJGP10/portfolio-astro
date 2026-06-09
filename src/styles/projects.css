@@ -1,43 +1,72 @@
 .projects {
-  padding: var(--space-3xl) var(--space-l);
-  background: var(--c-bg);
-  border-bottom: 1px solid var(--c-border-sub);
+  padding: var(--space-xl) var(--space-l);
+  background: transparent;
 }
 
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+.project-grid {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-m);
 }
 
+/* ── Card ── */
 .project-card {
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-m);
-  padding: var(--space-l);
-  background: var(--c-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-l);
   transition:
     border-color var(--duration) var(--ease),
+    background var(--duration) var(--ease),
     transform var(--duration) var(--ease);
 }
 
-.project-card--wide {
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
 .project-card:hover {
-  border-color: var(--c-muted);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
   transform: translateY(-2px);
 }
 
-.project-card-body {
+.project-card--featured {
+  grid-column: 1 / -1;
+}
+
+/* ── Image ── */
+.project-card-image {
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.project-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+
+.project-card:hover .project-card-image img {
+  transform: scale(1.02);
+}
+
+/* ── Content ── */
+.project-card-content {
+  padding: var(--space-l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
   flex: 1;
+}
+
+/* ── Header: title + CTA ── */
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
 }
 
 .project-card-title {
@@ -45,56 +74,100 @@
   font-size: var(--step-1);
   font-weight: 300;
   color: var(--c-text);
-  margin-bottom: var(--space-xs);
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
+.project-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--c-text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition:
+    background var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+.project-cta:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Description ── */
 .project-card-desc {
   color: var(--c-muted);
   font-size: var(--step--1);
   line-height: 1.75;
+  margin: 0;
 }
 
-.project-card-footer {
+/* ── Highlights ── */
+.project-highlights {
   display: flex;
   flex-direction: column;
-  gap: var(--space-s);
+  gap: 0.4rem;
+  padding-left: var(--space-s);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.project-card--wide .project-card-footer {
-  align-items: flex-end;
-  flex-shrink: 0;
+.project-highlight {
+  font-size: var(--step--1);
+  color: var(--c-muted);
+  line-height: 1.65;
+}
+
+/* ── Footer ── */
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  flex-wrap: wrap;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
+  flex: 1;
 }
 
 .project-tag {
   border: 1px solid var(--c-border);
-  color: var(--c-dim);
-  padding: 0.15rem 0.6rem;
-  border-radius: var(--radius-s);
+  color: var(--c-muted);
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
   font-size: var(--step--1);
   font-family: var(--font-body);
+  letter-spacing: 0.03em;
 }
 
-.project-links {
+.project-link-private {
   display: flex;
-  gap: var(--space-m);
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--step--1);
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.22);
+  flex-shrink: 0;
 }
 
 .project-link {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
   color: var(--c-muted);
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 1.1rem;
   transition: color var(--duration) var(--ease);
+  flex-shrink: 0;
 }
 
 .project-link:hover {
@@ -102,16 +175,12 @@
 }
 
 @media (max-width: 640px) {
-  .bento-grid {
+  .project-grid {
     grid-template-columns: 1fr;
   }
 
-  .project-card--wide {
+  .project-card-header {
     flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .project-card--wide .project-card-footer {
     align-items: flex-start;
   }
 }

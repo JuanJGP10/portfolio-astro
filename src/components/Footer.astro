@@ -1,0 +1,43 @@
+---
+import '../styles/footer.css';
+
+const stack = ['Astro', 'TypeScript', 'CSS', 'HTML'];
+
+const socials = [
+  { label: 'Email',    href: 'mailto:jjgphillips1@gmail.com', icon: 'fa-solid fa-envelope' },
+  { label: 'GitHub',   href: 'https://github.com/JuanJGP10',  icon: 'fa-brands fa-github'  },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/juan-garc%C3%ADa-phillips-58a418370/', icon: 'fa-brands fa-linkedin-in' },
+];
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+
+    <div class="footer-built">
+      <span class="footer-label">Hecho con</span>
+      <ul class="footer-stack">
+        {stack.map(s => <li>{s}</li>)}
+      </ul>
+    </div>
+
+    <div class="footer-right">
+      {socials.map(s => (
+        <a
+          class="footer-social"
+          href={s.href}
+          target={s.href.startsWith('http') ? '_blank' : undefined}
+          rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          aria-label={s.label}
+        >
+          <i class={s.icon} aria-hidden="true" />
+        </a>
+      ))}
+      <div class="footer-divider" aria-hidden="true"></div>
+      <a class="footer-top" href="#hero" aria-label="Volver al inicio">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+        Volver arriba
+      </a>
+    </div>
+
+  </div>
+</footer>

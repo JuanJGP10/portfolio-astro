@@ -4,33 +4,31 @@ import '../styles/projects.css';
 interface Project {
   title: string;
   description: string;
+  highlights?: string[];
   tags: string[];
-  github: string;
+  github?: string;
+  privateCode?: boolean;
   demo?: string;
-  wide?: boolean;
+  demoLabel?: string;
+  image?: string;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
   {
-    title: 'Portfolio Personal',
-    description: 'Este mismo portfolio, construido con Astro. Diseño minimalista, cero JavaScript enviado al navegador.',
-    tags: ['Astro', 'HTML', 'CSS'],
-    github: '#',
-    demo: '#',
-  },
-  {
-    title: 'Proyecto 2',
-    description: 'Descripción del segundo proyecto.',
-    tags: ['React', 'TypeScript'],
-    github: '#',
-  },
-  {
-    title: 'Proyecto destacado',
-    description: 'Este proyecto ocupa toda la fila inferior. Ideal para tu trabajo más importante o el que más quieras destacar al recruiter.',
-    tags: ['Spring Boot', 'Kotlin', 'React', 'PostgreSQL'],
-    github: '#',
-    demo: '#',
-    wide: true,
+    title: 'Piladea',
+    description:
+      'App de movilidad urbana para Pilar de la Horadada: los usuarios acumulan puntos pedaleando y los canjean en comercios locales.',
+    highlights: [
+      'Plataforma completa con sistema de gamificación (niveles, logros, retos semanales), tracking GPS y gestión de recompensas para usuarios y comercios colaboradores.',
+      'Proyecto de fin de grado con presupuesto aceptado por el Ayuntamiento de Pilar de la Horadada para su despliegue real en la ciudad.',
+    ],
+    tags: ['React', 'TypeScript', 'Mapbox', 'Spring Boot', 'Java'],
+    privateCode: true,
+    demo: 'https://piladea.vercel.app',
+    demoLabel: 'Ver proyecto',
+    image: '/screenshots/piladea.png',
+    featured: true,
   },
 ];
 ---
@@ -38,24 +36,44 @@ const projects: Project[] = [
 <section id="projects" class="projects">
   <div class="container">
     <h2 class="section-title">Proyectos</h2>
-    <div class="bento-grid">
+    <div class="project-grid">
       {projects.map(project => (
-        <article class={`project-card${project.wide ? ' project-card--wide' : ''}`}>
-          <div class="project-card-body">
-            <h3 class="project-card-title">{project.title}</h3>
-            <p class="project-card-desc">{project.description}</p>
-          </div>
-          <div class="project-card-footer">
-            <ul class="project-tags">
-              {project.tags.map(tag => <li class="project-tag">{tag}</li>)}
-            </ul>
-            <div class="project-links">
-              <a class="project-link" href={project.github} target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
-              </a>
+        <article class={`project-card${project.featured ? ' project-card--featured' : ''}`}>
+          {project.image && (
+            <div class="project-card-image">
+              <img src={project.image} alt={project.title} width="900" height="500" loading="lazy" />
+            </div>
+          )}
+          <div class="project-card-content">
+            <div class="project-card-header">
+              <h3 class="project-card-title">{project.title}</h3>
               {project.demo && (
-                <a class="project-link" href={project.demo} target="_blank" rel="noopener noreferrer">
-                  Demo →
+                <a class="project-cta" href={project.demo} target="_blank" rel="noopener noreferrer">
+                  {project.demoLabel ?? 'Ver proyecto'} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              )}
+            </div>
+            <p class="project-card-desc">{project.description}</p>
+            {project.highlights && project.highlights.length > 0 && (
+              <ul class="project-highlights">
+                {project.highlights.map(h => (
+                  <li class="project-highlight">{h}</li>
+                ))}
+              </ul>
+            )}
+            <div class="project-card-footer">
+              <ul class="project-tags">
+                {project.tags.map(tag => <li class="project-tag">{tag}</li>)}
+              </ul>
+              {project.privateCode && (
+                <span class="project-link-private">
+                  <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                  Privado
+                </span>
+              )}
+              {project.github && !project.privateCode && (
+                <a class="project-link" href={project.github} target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
                 </a>
               )}
             </div>

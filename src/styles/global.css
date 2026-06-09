@@ -3,11 +3,11 @@
 @layer base {
   :root {
     /* --- Paleta --- */
-    --c-bg:        #0D0D0D;
-    --c-surface:   #141414;
-    --c-surface-2: #1C1C1C;
-    --c-border:    #262626;
-    --c-border-sub:#1A1A1A;
+    --c-bg:        #09090D;
+    --c-surface:   #111118;
+    --c-surface-2: #18181F;
+    --c-border:    #222230;
+    --c-border-sub:#14141A;
     --c-text:      #F2F2F2;
     --c-muted:     #8C8C8C;
     --c-dim:       #404040;
@@ -35,7 +35,7 @@
     --space-3xl: 7rem;
 
     /* --- Layout --- */
-    --max-width:  700px;
+    --max-width:  640px;
     --nav-height: 68px;
     --radius-s:   6px;
     --radius-m:   10px;
@@ -65,9 +65,41 @@
     font-size: var(--step-0);
     line-height: 1.7;
     background-color: var(--c-bg);
+    background-image:
+      /* Hero zone — top */
+      radial-gradient(ellipse 80% 28% at 15%  5%,  rgba(99, 70, 220, 0.08) 0%, transparent 100%),
+      radial-gradient(ellipse 70% 22% at 85% 10%,  rgba(37, 99, 235, 0.06) 0%, transparent 100%),
+      /* Experience zone */
+      radial-gradient(ellipse 60% 18% at 10%  35%, rgba(37, 99, 235, 0.05) 0%, transparent 100%),
+      radial-gradient(ellipse 50% 16% at 88%  42%, rgba(99, 70, 220, 0.04) 0%, transparent 100%),
+      /* Projects zone */
+      radial-gradient(ellipse 70% 20% at 50%  60%, rgba(70, 55, 200, 0.05) 0%, transparent 100%),
+      /* Technologies zone */
+      radial-gradient(ellipse 60% 18% at 20%  80%, rgba(37, 99, 235, 0.05) 0%, transparent 100%),
+      radial-gradient(ellipse 50% 16% at 80%  87%, rgba(99, 70, 220, 0.04) 0%, transparent 100%),
+      /* Grid */
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size:
+      100% 100%, 100% 100%, 100% 100%, 100% 100%,
+      100% 100%, 100% 100%, 100% 100%,
+      60px 60px, 60px 60px;
     color: var(--c-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Film grain — estilo Linear.app / Vercel */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    opacity: 0.024;
+    pointer-events: none;
+    z-index: 9999;
   }
 
   :where(h1, h2, h3, h4) {
@@ -100,6 +132,7 @@
   section {
     scroll-margin-top: var(--nav-height);
   }
+
 }
 
 @layer layout {
@@ -114,7 +147,7 @@
     font-family: var(--font-display);
     font-weight: 300;
     color: var(--c-text);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-l);
     position: relative;
     padding-bottom: var(--space-s);
   }

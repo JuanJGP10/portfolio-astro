@@ -1,10 +1,63 @@
 .hero {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8rem var(--space-l) 0;
-  border-bottom: 1px solid var(--c-border-sub);
+  position: relative;
+  overflow: hidden;
+  background: #07070D;
+}
+
+/* Ambient blobs */
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(32px, -22px) scale(1.06); }
+}
+
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-28px, 18px) scale(0.96); }
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Indigo-violet — top-left corner */
+.hero-blob-a {
+  width: 520px;
+  height: 520px;
+  background: rgba(99, 70, 220, 0.28);
+  filter: blur(150px);
+  top: -10%;
+  left: -14%;
+  animation: float-a 16s ease-in-out infinite;
+}
+
+/* Deep blue — bottom-right corner */
+.hero-blob-b {
+  width: 440px;
+  height: 440px;
+  background: rgba(37, 99, 235, 0.22);
+  filter: blur(130px);
+  bottom: 2%;
+  right: -12%;
+  animation: float-b 20s ease-in-out infinite;
+}
+
+/* Center glow — connects corner blobs, lifts content area */
+.hero-blob-c {
+  width: 720px;
+  height: 720px;
+  background: rgba(99, 70, 220, 0.05);
+  filter: blur(170px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hero-container {
@@ -12,12 +65,13 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: calc(100vh - 8rem);
-  padding-bottom: 2.5rem;
-  padding-top: 3.5rem;
+  min-height: calc(100dvh - 8rem);
+  padding-bottom: var(--space-xl);
+  padding-top: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
-/* --- Variante izquierda: añade hero-left al div.container para comparar --- */
 .hero-container.hero-left {
   align-items: flex-start;
   text-align: left;
@@ -64,11 +118,10 @@
   width: 14rem;
   height: 14rem;
   border-radius: 50%;
-  border: 1px solid var(--c-border);
-  background-color: white;
-  background-repeat: no-repeat;
-  background-size: 90%;
-  background-position: center 20%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+  object-position: center 15%;
+  box-shadow: 0 0 0 1px rgba(99, 70, 220, 0.08), 0 8px 40px rgba(0, 0, 0, 0.7);
 }
 
 .hero-cta {
@@ -96,7 +149,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-s);
-  margin-top: var(--space-xl);
+  margin-top: var(--space-m);
   align-items: center;
 }
 
@@ -104,56 +157,50 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--c-muted);
+  color: rgba(255, 255, 255, 0.5);
   font-size: var(--step--1);
   font-family: var(--font-body);
-  border: 1px solid var(--c-border);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 0.45rem 1.1rem;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
   transition:
     color var(--duration) var(--ease),
-    border-color var(--duration) var(--ease);
+    border-color var(--duration) var(--ease),
+    background var(--duration) var(--ease);
 }
 
 .hero-contact-link:hover {
   color: var(--c-text);
-  border-color: var(--c-muted);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* --- Scroll hint --- */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(10px); }
+.hero-contact-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 3px;
 }
 
-.hero-scroll {
-  margin-top: auto;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--c-muted);
-  font-family: var(--font-body);
-  font-size: var(--step--1);
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  animation: bounce 2s ease-in-out infinite;
-  transition: color var(--duration) var(--ease);
-}
-
-.hero-scroll:hover {
-  color: var(--c-muted);
-}
-
-.hero-scroll i {
-  font-size: 1.1rem;
-}
 
 @media (max-width: 560px) {
   .hero-bio-row {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .hero-bio {
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob-a,
+  .hero-blob-b,
+  .hero-blob-c {
+    animation: none;
   }
 }

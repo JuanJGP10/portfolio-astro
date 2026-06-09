@@ -121,3 +121,13 @@
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .nav-socials {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 0.35rem 0.5rem;
+  }
+}

@@ -22,23 +22,24 @@ const contactLinks = [
 ---
 
 <section id="hero" class="hero">
+  <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
   <div class="container hero-container">
     <h1 class="hero-title">Juan García Phillips</h1>
     <p class="hero-subtitle">Fullstack Developer</p>
 
     <div class="hero-bio-row">
       <p class="hero-bio">
-        Transformo operaciones complejas en ecosistemas inteligentes con
-        Ingeniería de Software y Automatización. Experto en integrar Datos, IA y
-        Plataformas Empresariales. No solo escribo código, construyo soluciones.
+        Recién titulado de DAM (Desarrollo de Aplicaciones Multiplataforma) vivo en Alicante.
       </p>
-      <div
+      <img
         class="hero-photo"
-        style={`background-image: url(${yoImg.src})`}
-        role="img"
-        aria-label="Juan García Phillips"
-      >
-      </div>
+        src={yoImg.src}
+        width={yoImg.width}
+        height={yoImg.height}
+        alt="Juan García Phillips"
+      />
     </div>
 
     <div class="hero-contact">
@@ -60,9 +61,5 @@ const contactLinks = [
       }
     </div>
 
-    <a href="#experience" class="hero-scroll" aria-label="Ver experiencia">
-      <span>Experiencia</span>
-      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-    </a>
   </div>
 </section>
