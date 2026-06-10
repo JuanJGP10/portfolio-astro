@@ -30,6 +30,10 @@ const { title = "Mi Portfolio" } = Astro.props;
 
     <link rel="icon" type="image/png" href="/dev1.png" />
     <title>{title}</title>
+    <script is:inline>
+      const _l = localStorage.getItem('lang');
+      if (_l === 'en') { document.documentElement.setAttribute('data-lang', 'en'); document.documentElement.lang = 'en'; }
+    </script>
   </head>
   <body>
     <Navbar />

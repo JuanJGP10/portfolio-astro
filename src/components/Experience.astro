@@ -4,13 +4,18 @@ import "../styles/experience.css";
 interface Highlight {
   title: string;
   text: string;
+  i18nTitleKey: string;
+  i18nTextKey: string;
 }
 
 interface Job {
   role: string;
   company: string;
   period: string;
+  i18nRoleKey: string;
+  i18nPeriodKey: string;
   description?: string;
+  i18nDescKey?: string;
   highlights?: Highlight[];
   tags: string[];
   logo?: string;
@@ -19,26 +24,37 @@ interface Job {
 const jobs: Job[] = [
   {
     role: "Desarrollador de Software Full-Stack",
+    i18nRoleKey: "experience.job0.role",
     company: "Phocus Block SL",
     period: "Febrero 2026 — Junio 2026",
+    i18nPeriodKey: "experience.job0.period",
     description:
       "Desarrollador full-stack en prácticas construyendo software en producción para una empresa de fabricación de plásticos.",
+    i18nDescKey: "experience.job0.description",
     highlights: [
       {
         title: "MES y analítica industrial",
         text: "Reconstrucción de motor de cálculo OEE en tiempo real procesando millones de lecturas de sensores industriales, visualizadas en dashboards Grafana activos en planta. Entrega de un informe de producción diario automatizado con KPIs consumido por dirección.",
+        i18nTitleKey: "experience.job0.h0.title",
+        i18nTextKey: "experience.job0.h0.text",
       },
       {
         title: "Migración de cliente ERP legacy",
         text: "Reemplazo de un cliente ERP de 32 bits por una SPA en React + TypeScript usada a diario por los operarios para gestionar producción en planta.",
+        i18nTitleKey: "experience.job0.h1.title",
+        i18nTextKey: "experience.job0.h1.text",
       },
       {
         title: "Backend multi-base de datos",
         text: "Diseño de una capa de servicios conectando a un ERP legacy con bases de datos PostgreSQL, incluyendo integración con hardware industrial en planta.",
+        i18nTitleKey: "experience.job0.h2.title",
+        i18nTextKey: "experience.job0.h2.text",
       },
       {
         title: "Arquitectura",
         text: "Proyecto estructurado con Arquitectura Hexagonal utilizando Spring Boot + Java.",
+        i18nTitleKey: "experience.job0.h3.title",
+        i18nTextKey: "experience.job0.h3.text",
       },
     ],
     tags: [
@@ -57,7 +73,7 @@ const jobs: Job[] = [
 
 <section id="experience" class="experience">
   <div class="container">
-    <h2 class="section-title">Experiencia</h2>
+    <h2 class="section-title" data-i18n="experience.title">Experiencia</h2>
     <div class="experience-card">
       <ul class="experience-list">
         {
@@ -75,19 +91,19 @@ const jobs: Job[] = [
                 </div>
               </div>
               <div class="experience-content">
-                <span class="experience-period">{job.period}</span>
+                <span class="experience-period" data-i18n={job.i18nPeriodKey}>{job.period}</span>
                 <span class="experience-company">{job.company}</span>
-                <span class="experience-role">{job.role}</span>
+                <span class="experience-role" data-i18n={job.i18nRoleKey}>{job.role}</span>
                 {job.description && (
-                  <p class="experience-desc">{job.description}</p>
+                  <p class="experience-desc" data-i18n={job.i18nDescKey}>{job.description}</p>
                 )}
                 {job.highlights && job.highlights.length > 0 && (
                   <ul class="experience-highlights">
                     {job.highlights.map((h) => (
                       <li class="experience-highlight">
-                        <strong>{h.title}</strong>
+                        <strong data-i18n={h.i18nTitleKey}>{h.title}</strong>
                         {" — "}
-                        {h.text}
+                        <span data-i18n={h.i18nTextKey}>{h.text}</span>
                       </li>
                     ))}
                   </ul>
