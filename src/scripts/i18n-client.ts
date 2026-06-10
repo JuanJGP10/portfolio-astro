@@ -1,4 +1,5 @@
 import { translations, type Lang, type TranslationKey } from '../i18n/translations';
+export type { Lang };
 
 const STORAGE_KEY = 'lang';
 const DEFAULT_LANG: Lang = 'es';

@@ -4,12 +4,15 @@ import '../styles/projects.css';
 interface Project {
   title: string;
   description: string;
+  i18nDescKey: string;
   highlights?: string[];
+  i18nHighlightKeys?: string[];
   tags: string[];
   github?: string;
   privateCode?: boolean;
   demo?: string;
   demoLabel?: string;
+  i18nDemoLabelKey?: string;
   image?: string;
   featured?: boolean;
 }
@@ -19,14 +22,17 @@ const projects: Project[] = [
     title: 'Piladea',
     description:
       'App de movilidad urbana para Pilar de la Horadada: los usuarios acumulan puntos pedaleando y los canjean en comercios locales.',
+    i18nDescKey: 'projects.p0.description',
     highlights: [
       'Plataforma completa con sistema de gamificación (niveles, logros, retos semanales), tracking GPS y gestión de recompensas para usuarios y comercios colaboradores.',
       'Proyecto de fin de grado con presupuesto aceptado por el Ayuntamiento de Pilar de la Horadada para su despliegue real en la ciudad.',
     ],
+    i18nHighlightKeys: ['projects.p0.h0', 'projects.p0.h1'],
     tags: ['React', 'TypeScript', 'Mapbox', 'Spring Boot', 'Java'],
     privateCode: true,
     demo: 'https://piladea.vercel.app',
     demoLabel: 'Ver proyecto',
+    i18nDemoLabelKey: 'projects.p0.demoLabel',
     image: '/screenshots/piladea.png',
     featured: true,
   },
@@ -35,7 +41,7 @@ const projects: Project[] = [
 
 <section id="projects" class="projects">
   <div class="container">
-    <h2 class="section-title">Proyectos</h2>
+    <h2 class="section-title" data-i18n="projects.title">Proyectos</h2>
     <div class="project-grid">
       {projects.map(project => (
         <article class={`project-card${project.featured ? ' project-card--featured' : ''}`}>
@@ -49,15 +55,16 @@ const projects: Project[] = [
               <h3 class="project-card-title">{project.title}</h3>
               {project.demo && (
                 <a class="project-cta" href={project.demo} target="_blank" rel="noopener noreferrer">
-                  {project.demoLabel ?? 'Ver proyecto'} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                  <span data-i18n={project.i18nDemoLabelKey}>{project.demoLabel ?? 'Ver proyecto'}</span>
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
               )}
             </div>
-            <p class="project-card-desc">{project.description}</p>
+            <p class="project-card-desc" data-i18n={project.i18nDescKey}>{project.description}</p>
             {project.highlights && project.highlights.length > 0 && (
               <ul class="project-highlights">
-                {project.highlights.map(h => (
-                  <li class="project-highlight">{h}</li>
+                {project.highlights.map((h, i) => (
+                  <li class="project-highlight" data-i18n={project.i18nHighlightKeys?.[i]}>{h}</li>
                 ))}
               </ul>
             )}
@@ -68,7 +75,7 @@ const projects: Project[] = [
               {project.privateCode && (
                 <span class="project-link-private">
                   <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                  Privado
+                  <span data-i18n="projects.private">Privado</span>
                 </span>
               )}
               {project.github && !project.privateCode && (

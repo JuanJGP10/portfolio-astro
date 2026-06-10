@@ -2,7 +2,13 @@
 import "../styles/technologies.css";
 import { Icon } from "astro-icon/components";
 
-const categories = [
+interface Category {
+  title: string;
+  i18nKey?: string;
+  techs: { name: string; icon: string; isPng?: boolean }[];
+}
+
+const categories: Category[] = [
   {
     title: "Frontend",
     techs: [
@@ -29,6 +35,7 @@ const categories = [
   },
   {
     title: "Herramientas",
+    i18nKey: "tech.cat2",
     techs: [
       { name: "Git", icon: "logos:git-icon" },
       { name: "GitHub", icon: "logos:github-icon" },
@@ -42,14 +49,14 @@ const categories = [
 
 <section id="technologies" class="technologies">
   <div class="container">
-    <h2 class="section-title">Tecnologías</h2>
+    <h2 class="section-title" data-i18n="tech.title">Tecnologías</h2>
     <div class="tech-grid">
       {
         categories.map((cat) => (
           <div class="tech-card">
             <div class="tech-card-inner">
               <div class="tech-card-header">
-                <h3 class="tech-card-title">{cat.title}</h3>
+                <h3 class="tech-card-title" data-i18n={cat.i18nKey}>{cat.title}</h3>
               </div>
               <ul class="tech-list">
                 {cat.techs.map((tech) => (

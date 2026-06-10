@@ -14,7 +14,7 @@ const socials = [
   <div class="container footer-inner">
 
     <div class="footer-built">
-      <span class="footer-label">Hecho con</span>
+      <span class="footer-label" data-i18n="footer.builtWith">Hecho con</span>
       <ul class="footer-stack">
         {stack.map(s => <li>{s}</li>)}
       </ul>
@@ -33,9 +33,9 @@ const socials = [
         </a>
       ))}
       <div class="footer-divider" aria-hidden="true"></div>
-      <a class="footer-top" href="#hero" aria-label="Volver al inicio">
+      <a class="footer-top" href="#hero" aria-label="Volver al inicio / Back to top">
         <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-        Volver arriba
+        <span data-i18n="footer.backToTop">Volver arriba</span>
       </a>
     </div>
 

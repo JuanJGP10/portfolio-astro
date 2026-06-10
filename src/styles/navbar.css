@@ -112,6 +112,55 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* ── Language switch ─────────────────────────────────────────── */
+.lang-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.lang-switch-pill {
+  position: absolute;
+  inset-block: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 100px;
+  pointer-events: none;
+  transition: transform var(--duration) var(--ease);
+}
+
+html[data-lang="en"] .lang-switch-pill {
+  transform: translateX(100%);
+}
+
+.lang-switch-btn {
+  position: relative;
+  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--c-muted);
+  border-radius: 100px;
+  transition: color var(--duration) var(--ease);
+  line-height: 1;
+}
+
+.lang-switch-btn--active,
+.lang-switch-btn:hover {
+  color: var(--c-text);
+}
+
 @media (max-width: 600px) {
   .nav-links {
     gap: 0;
